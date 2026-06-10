@@ -3,12 +3,22 @@ import csv
 ### FUNCIONES PRINCIPALES ###
 
 
-# AGREGAR PAIS
+# FUNCION QUE LEE EL ARCHIVO
+def cargar_datos_csv():  # Contiene el with open(..., 'r') para volcar el contenido del archivo a la estructura que usamos durante la ejecución.
+    pass
+
+
+# FUNCION QUE GUARDA DATOS EN EL ARCHIVO
+def guardar_datos_csv():  # Contiene el with open(..., 'w') para impactar los cambios en el archivo cuando usemos agregar_pais() o actualizar_pob_sup().
+    pass
+
+
+# FUNCION AGREGAR PAIS
 def agregar_pais():
     pass
 
 
-# ACTUALIZAR POBLACION Y SUPERFICIE PAIS
+# FUNCION ACTUALIZAR POBLACION Y SUPERFICIE PAIS
 def actualizar_pob_sup():
     pass
 
