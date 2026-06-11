@@ -108,25 +108,41 @@ def actualizar_pob_sup():
 
 
 # BUSCAR PAIS POR NOMBRE - OLI
-def buscar_pais():  ## se me ocurre la funcion startswith() para las coincidencias parciales.
-    ASDADSASDFAS
-    pass
+def buscar_pais(
+    diccionario,
+):  ## se me ocurre la funcion startswith() para las coincidencias parciales.
+    print("\n====== BUSCAR PAIS POR NOMBRE ======")
+    busqueda_pais = (
+        input(
+            "Ingrese el pais para buscar sus datos o introduce al menos las tres primeras letras para buscar coincidencias: "
+        )
+        .strip()
+        .capitalize()
+    )
+    pais_encontrado = False
+    coincidencias_parciales = []
+    for pais in diccionario:
+        if len(busqueda_pais) < 3:
+            print("Debes introducir al menos tres letras para buscar coincidencias. ")
+            break
+        elif pais["nombre"].startswith(busqueda_pais):
+            coincidencias_parciales.append(pais["nombre"])
+
+    if len(coincidencias_parciales) == 0:
+        print("Ningun pais coincide con los datos introducidos. \n")
+    elif len(coincidencias_parciales) == 1:
+        print(f"Datos actuales de {diccionario[coincidencias_parciales]}")
 
 
 # FILTRAR PAISES (VER SI HACEMOS UNA SOLA O VARIAS) - OLI
 def filtrar_pais():
-    ASDADSADSADSDAS
     pass
 
 
 # ORDENAR PAISES POR NOMBRE, POBLACION, SUPERFICIE
 def ordenar_pais():
     print("\n====== ORDENAR PAÍSES - según el criterio elegido ======")
-    print(
-        "1.Por Nombre" 
-        "\n2.Por Población" 
-        "\n3.Por Superficie"
-        )
+    print("1.Por Nombre" "\n2.Por Población" "\n3.Por Superficie")
     print("========================================================\n")
 
     criterio_orden = input("Seleccione el criterio: ").strip()
@@ -141,22 +157,28 @@ def ordenar_pais():
         case _:
             print("Opción no válida. Por favor, seleccione 1, 2 o 3.")
             return
-    
+
     orden = input(" Orden: 'A' Ascendente o 'D' Descendente: ").strip().upper()
     if orden not in ("A", "D"):
         print("Opcion de orden no válida.")
         return
-    
+
     descendete = orden == "D"
     paises_ordenados = sorted(diccionario, key=lambda x: x[clave], reverse=descendete)
-    print(f"\nPaíses ordenados por {clave} ({'Descendente' if descendete else 'Ascendente'}):")
+    print(
+        f"\nPaíses ordenados por {clave} ({'Descendente' if descendete else 'Ascendente'}):"
+    )
     for pais in paises_ordenados:
-        print(f"{pais['nombre']:<15} | Población: {pais['poblacion']:<10} | Superficie: {pais['superficie']:<10} km² | Continente: {pais['continente']:<10}")
+        print(
+            f"{pais['nombre']:<15} | Población: {pais['poblacion']:<10} | Superficie: {pais['superficie']:<10} km² | Continente: {pais['continente']:<10}"
+        )
         print("=" * 100)
+
+
 # MOSTRAR ESTADISTICAS:
-#Pais con menor y mayor poblacion. 
-#Promedio de poblacion
-#Promedio de superfice
+# Pais con menor y mayor poblacion.
+# Promedio de poblacion
+# Promedio de superfice
 def mostrar_estadisticas():
     pass
 
@@ -172,13 +194,15 @@ while True:  # aca poner el menu con sus validaciones
     while True:  # validacion de errores en las opciones del menu
         try:
             print("\n=============== MENÚ PRINCIPAL ===============")
-            print("1. Agregaar un país al registro."
-                    "\n2. Actualizar datos de población y superficie."
-                    "\n3. Buscar país."
-                    "\n4. Búsqueda avanzada por filtro."
-                    "\n5. Lista de países ordenada."
-                    "\n6. Estadísticas."
-                    "\n7. Salir.")
+            print(
+                "1. Agregaar un país al registro."
+                "\n2. Actualizar datos de población y superficie."
+                "\n3. Buscar país."
+                "\n4. Búsqueda avanzada por filtro."
+                "\n5. Lista de países ordenada."
+                "\n6. Estadísticas."
+                "\n7. Salir."
+            )
             print("==============================================\n")
             menu = int(input("Su eleccion: "))
             print()
@@ -206,7 +230,7 @@ while True:  # aca poner el menu con sus validaciones
             guardar_datos_csv(diccionario)
 
         case 3:
-            pass
+            buscar_pais(diccionario)
 
         case 4:
             pass
