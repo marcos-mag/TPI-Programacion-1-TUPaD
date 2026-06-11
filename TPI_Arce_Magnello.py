@@ -177,10 +177,49 @@ def ordenar_pais():
 
 # MOSTRAR ESTADISTICAS:
 # Pais con menor y mayor poblacion.
-# Promedio de poblacion
-# Promedio de superfice
+# Promedio de poblacion.
+# Promedio de superfice.
+# Promedio de paises por continente.
 def mostrar_estadisticas():
-    pass
+    if not diccionario:
+        print("No hay países cargados.")
+        return
+
+    print ("\n====== ESTADÍSTICAS ======")
+
+#Poblacion - Promedio
+    mayor_pob = max (diccionario, key = lambda p: int(p["poblacion"]))
+    menor_pob = min (diccionario, key = lambda p: int(p["poblacion"]))
+    prom_pob  = sum (int(p["poblacion"]) for p in diccionario) / len(diccionario)
+
+#Superficie - Promedio
+    mayor_sup = max (diccionario, key = lambda p: int(p["superficie"]))
+    menor_sup = min (diccionario, key = lambda p: int(p["superficie"]))
+    prom_sup  = sum (int(p["superficie"]) for p in diccionario) / len(diccionario)
+
+#Paises por continente 
+    continentes = {}
+    for p in diccionario:
+        c = p ["continente"]
+        continentes[c] = continentes.get(c, 0) + 1
+
+    print(f"\n Población:")
+    print(f"    Mayor: {mayor_pob['nombre']}({int(mayor_pob['poblacion']):,})")
+    print(f"    Menor: {menor_pob['nombre']}({int(menor_pob['poblacion']):,})")
+    print(f"    Promedio: {prom_pob:,.0f}")
+
+    print(f"\n  Superficie:")
+    print(f"    Mayor:   {mayor_sup['nombre']} ({int(mayor_sup['superficie']):,} km²)")
+    print(f"    Menor:   {menor_sup['nombre']} ({int(menor_sup['superficie']):,} km²)")
+    print(f"    Promedio: {prom_sup:,.0f} km²")
+
+    print(f"\n  Países por continente:")
+    for continente, cantidad in sorted(continentes.items()):
+        print(f"    {continente}: {cantidad}")
+
+
+
+
 
 
 # BLOQUE PRINCIPAL
@@ -239,7 +278,7 @@ while True:  # aca poner el menu con sus validaciones
             ordenar_pais()
 
         case 6:
-            pass
+            mostrar_estadisticas()
 
         case 7:
             break
