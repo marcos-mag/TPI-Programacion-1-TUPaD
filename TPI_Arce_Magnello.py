@@ -83,13 +83,13 @@ def agregar_pais(lista_paises):
 def actualizar_pob_sup():
     print("\n====== ACTUALIZAR POBLACION Y SUPERFICIE DE UN PAIS ======")
     pais_actualizar = input("Ingrese el nombre del pais a actualizar: ").strip().capitalize()
-    
+
     for pais in diccionario:
         if pais["nombre"] == pais_actualizar:
             print (f"Datos actuales de {pais_actualizar}: | Poblacion: {pais['poblacion']} | Superficie: {pais['superficie']} | Continente: {pais['continente']} |")
             try:
-                nueva_pob = int(input(f"Ingrese la nueva poblacion: ")).strip()
-                nueva_sup = int(input(f"Ingrese la nueva superficie (km²): ")).strip()
+                nueva_pob = int(input(f"Ingrese la nueva poblacion: "))
+                nueva_sup = int(input(f"Ingrese la nueva superficie (km²): "))
                 pais["poblacion"] = nueva_pob
                 pais["superficie"] = nueva_sup
                 
@@ -154,7 +154,9 @@ while True:  # aca poner el menu con sus validaciones
             guardar_datos_csv(diccionario)
 
         case 2:
-            pass
+            actualizar_pob_sup()
+            print(diccionario)  # prueba, borrar despues
+            guardar_datos_csv(diccionario)
 
         case 3:
             pass
