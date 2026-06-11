@@ -111,11 +111,16 @@ def filtrar_pais():
 
 
 # ORDENAR PAISES POR NOMBRE, POBLACION, SUPERFICIE
+#asdsadasdasdasdada
+#$asASasASASDDSA
 def ordenar_pais():
     pass
 
 
 # MOSTRAR ESTADISTICAS:
+#Pais con menor y mayor poblacion. 
+#Promedio de poblacion
+#Promedio de superfice
 def mostrar_estadisticas():
     pass
 
