@@ -114,7 +114,7 @@ def buscar_pais(
     print("\n====== BUSCAR PAIS POR NOMBRE ======")
     busqueda_pais = (
         input(
-            "Ingrese el pais para buscar sus datos o introduce al menos las tres primeras letras para buscar coincidencias: "
+            "Ingrese el país para buscar sus datos o introduce al menos las tres primeras letras para buscar coincidencias: "
         )
         .strip()
         .capitalize()
@@ -124,17 +124,43 @@ def buscar_pais(
     for pais in diccionario:
         if len(busqueda_pais) < 3:
             print("Debes introducir al menos tres letras para buscar coincidencias. ")
-            break
+            return
         elif pais["nombre"].startswith(busqueda_pais):
-            coincidencias_parciales.append(pais["nombre"])
+            coincidencias_parciales.append(pais)
 
     if len(coincidencias_parciales) == 0:
         print("Ningun pais coincide con los datos introducidos. \n")
     elif len(coincidencias_parciales) == 1:
-        print(f"Datos actuales de {diccionario[coincidencias_parciales]}")
+        for pais in diccionario:
+            if pais["nombre"] == coincidencias_parciales[0]:
+                print(
+                    f"Datos actuales de {coincidencias_parciales[0]}: | Poblacion: {pais['poblacion']} | Superficie: {pais['superficie']} | Continente: {pais['continente']} |"
+                )
+    else:
+        print(
+            f"Tu busqueda arrojó mas de un resultado. Selecciona el país de la lista para ver sus datos."
+        )
+        for indice, pais in enumerate(coincidencias_parciales, start=1):
+            print(indice, pais)
+            pais_ok = False
+        try:
+            pais_elegido = int(input("Tu elección: "))
+            if not pais_elegido in range(1, len(coincidencias_parciales) + 1):
+                print(
+                    "No has ingresado una opcion valida. Recorda ingresar un numero de la lista. \n"
+                )
+            else:
+                pais_ok = True
+                pais_elegido -= 1
+        except ValueError:
+            print(
+                "No has ingresado una opcion valida. Solo se pueden ingresar numeros. \n"
+            )
+        if pais_ok:
+            pass
 
 
-# FILTRAR PAISES (VER SI HACEMOS UNA SOLA O VARIAS) - OLI
+# FILTRAR PAISES - OLI
 def filtrar_pais():
     pass
 
