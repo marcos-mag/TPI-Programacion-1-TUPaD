@@ -120,12 +120,39 @@ def filtrar_pais():
 
 
 # ORDENAR PAISES POR NOMBRE, POBLACION, SUPERFICIE
-#asdsadasdasdasdada
-#$asASasASASDDSA
 def ordenar_pais():
-    pass
+    print("\n====== ORDENAR PAÍSES - según el criterio elegido ======")
+    print(
+        "1.Por Nombre" 
+        "\n2.Por Población" 
+        "\n3.Por Superficie"
+        )
+    print("========================================================\n")
 
+    criterio_orden = input("Seleccione el criterio: ").strip()
 
+    match criterio_orden:
+        case "1":
+            clave = "nombre"
+        case "2":
+            clave = "poblacion"
+        case "3":
+            clave = "superficie"
+        case _:
+            print("Opción no válida. Por favor, seleccione 1, 2 o 3.")
+            return
+    
+    orden = input(" Orden: 'A' Ascendente o 'D' Descendente: ").strip().upper()
+    if orden not in ("A", "D"):
+        print("Opcion de orden no válida.")
+        return
+    
+    descendete = orden == "D"
+    paises_ordenados = sorted(diccionario, key=lambda x: x[clave], reverse=descendete)
+    print(f"\nPaíses ordenados por {clave} ({'Descendente' if descendete else 'Ascendente'}):")
+    for pais in paises_ordenados:
+        print(f"{pais['nombre']:<15} | Población: {pais['poblacion']:<10} | Superficie: {pais['superficie']:<10} km² | Continente: {pais['continente']:<10}")
+        print("=" * 100)
 # MOSTRAR ESTADISTICAS:
 #Pais con menor y mayor poblacion. 
 #Promedio de poblacion
@@ -140,13 +167,19 @@ diccionario_completo = cargar_datos_csv(diccionario)
 print(diccionario)
 while True:  # aca poner el menu con sus validaciones
     print(
-        "Bienvenido al sistema de gestion de datos geograficos. Ingresa la opcion para realizar la opcion que desees:\n"
+        "\nBienvenido al sistema de gestion de datos geograficos. Ingresa la opcion para realizar la opcion que desees:"
     )
     while True:  # validacion de errores en las opciones del menu
         try:
-            print(
-                "1. Agregar un país al registro. \n2. Actualizar datos de poblacion y superficie. \n3. Buscar pais. \n4.Busqueda avanzada por filtro. \n5. Lista de paises ordenada. \n6. Estadisticas. \n7.Salir."
-            )
+            print("\n=============== MENÚ PRINCIPAL ===============")
+            print("1. Agregaar un país al registro."
+                    "\n2. Actualizar datos de población y superficie."
+                    "\n3. Buscar país."
+                    "\n4. Búsqueda avanzada por filtro."
+                    "\n5. Lista de países ordenada."
+                    "\n6. Estadísticas."
+                    "\n7. Salir.")
+            print("==============================================\n")
             menu = int(input("Su eleccion: "))
             print()
             if not menu in range(1, 8):
@@ -179,7 +212,7 @@ while True:  # aca poner el menu con sus validaciones
             pass
 
         case 5:
-            pass
+            ordenar_pais()
 
         case 6:
             pass
