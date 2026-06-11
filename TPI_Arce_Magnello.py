@@ -79,34 +79,43 @@ def agregar_pais(lista_paises):
 
 
 # FUNCION ACTUALIZAR POBLACION Y SUPERFICIE PAIS
-#Actualiza poblacion y superficie de un pais ya registrasdo.
+# Actualiza poblacion y superficie de un pais ya registrasdo.
 def actualizar_pob_sup():
     print("\n====== ACTUALIZAR POBLACION Y SUPERFICIE DE UN PAIS ======")
-    pais_actualizar = input("Ingrese el nombre del pais a actualizar: ").strip().capitalize()
+    pais_actualizar = (
+        input("Ingrese el nombre del pais a actualizar: ").strip().capitalize()
+    )
 
     for pais in diccionario:
         if pais["nombre"] == pais_actualizar:
-            print (f"Datos actuales de {pais_actualizar}: | Poblacion: {pais['poblacion']} | Superficie: {pais['superficie']} | Continente: {pais['continente']} |")
+            print(
+                f"Datos actuales de {pais_actualizar}: | Poblacion: {pais['poblacion']} | Superficie: {pais['superficie']} | Continente: {pais['continente']} |"
+            )
             try:
                 nueva_pob = int(input(f"Ingrese la nueva poblacion: "))
                 nueva_sup = int(input(f"Ingrese la nueva superficie (km²): "))
                 pais["poblacion"] = nueva_pob
                 pais["superficie"] = nueva_sup
-                
+
                 print(f"Datos de {pais_actualizar} actualizados correctamente.")
             except ValueError:
-                print("No has ingresado los valores correctamente. Recorda ingresar solo numeros para la poblacion y la superficie.")
+                print(
+                    "No has ingresado los valores correctamente. Recorda ingresar solo numeros para la poblacion y la superficie."
+                )
                 return
-            
+
     print(f"No se encontró el pais '{pais_actualizar}' en los registros.")
 
-# BUSCAR PAIS POR NOMBRE
+
+# BUSCAR PAIS POR NOMBRE - OLI
 def buscar_pais():  ## se me ocurre la funcion startswith() para las coincidencias parciales.
+    ASDADSASDFAS
     pass
 
 
-# FILTRAR PAISES (VER SI HACEMOS UNA SOLA O VARIAS)
+# FILTRAR PAISES (VER SI HACEMOS UNA SOLA O VARIAS) - OLI
 def filtrar_pais():
+    ASDADSADSADSDAS
     pass
 
 
