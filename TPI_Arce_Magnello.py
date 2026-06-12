@@ -55,12 +55,28 @@ def agregar_pais(lista_paises):
                     f"Ingrese la superficie de {nuevo_pais} (ingrese solamente numeros): "
                 )
             )
-            nuevo_pais_cont = input(
-                f"Ingrese el continente donde se encuentra {nuevo_pais}: "
-            )  # podria ser con opciones mejor o validar que este en lista
+            print(
+                f"Ingrese el continente donde se encuentra {nuevo_pais}: \n1. África \n2. América \n3. Asia \n4. Europa \n5. Oceanía \n"
+            )
+            menu_cont = int(input("Su eleccion: "))
+            match menu_cont:
+                case 1:
+                    nuevo_pais_cont = "África"
+                case 2:
+                    nuevo_pais_cont = "América"
+                case 3:
+                    nuevo_pais_cont = "Asia"
+                case 4:
+                    nuevo_pais_cont = "Europa"
+                case 5:
+                    nuevo_pais_cont = "Oceanía"
+                case _:
+                    print("No has ingresado una opcion valida para el continente. ")
+                    break
+
         except ValueError:
             print(
-                "No has ingresado los valores correctamente. Recorda ingresar solo numeros para la poblacion y la superficie."
+                "No has ingresado los valores correctamente. Recorda ingresar solo numeros para la poblacion y la superficie, y un elegir un numero de la lista para agregar el continente al que pertenece. \n"
             )
             break
         else:
@@ -166,9 +182,83 @@ def buscar_pais(diccionario):
             )
 
 
-# FILTRAR PAISES - OLI
-def filtrar_pais():
-    pass
+# FILTRAR PAISES
+def filtrar_pais(diccionario):
+    print("\n====== FILTRAR PAÍSES - según el criterio elegido ======")
+    print("1.Por Continente" "\n2.Por Rango de Población" "\n3.Por Rango de Superficie")
+    print("========================================================\n")
+
+    criterio_filtro = input("Seleccione el criterio: ").strip()
+
+    match criterio_filtro:
+        case "1":
+            print("Elegir un continente para mostrar los paises cargados: \n")
+            print("1. África \n2. América \n3. Asia \n4. Europa \n5. Oceanía \n")
+            menu_cont = input("Su eleccion: ").strip()
+            match menu_cont:
+                case "1":
+                    continente = "Africa"
+                case "2":
+                    continente = "América"
+                case "3":
+                    continente = "Asia"
+                case "4":
+                    continente = "Europa"
+                case "5":
+                    continente = "Oceanía"
+                case _:
+                    print("No has ingresado una opcion valida para el continente. ")
+                    return
+
+            print(f"Paises pertenecientes al contiente {continente}: \n")
+            for pais in diccionario:
+                if pais["continente"] == continente:
+                    print(
+                        f"{pais['nombre']} | Población: {pais['poblacion']} | Superficie: {pais['superficie']} km² | Continente: {pais['continente']}"
+                    )
+                    print("=" * 100)
+
+        case "2":
+            try:
+                print("Ingresa un rango minimo de poblacion para filtar: \n")
+                rango_min_pob = int(input("Su eleccion: "))
+                print("Ahora ingresa un rango maximo de poblacion para filtrar: \n")
+                rango_max_pob = int(input("Su eleccion: "))
+            except ValueError:
+                print("Error. Solo se pueden ingresar numeros para los rangos. ")
+                return
+            for pais in diccionario:
+                if (
+                    int(pais["poblacion"]) >= rango_min_pob
+                    and int(pais["poblacion"]) <= rango_max_pob
+                ):
+                    print(
+                        f"{pais['nombre']} | Población: {pais['poblacion']} | Superficie: {pais['superficie']} km² | Continente: {pais['continente']}"
+                    )
+                    print("=" * 100)
+
+        case "3":
+            try:
+                print("Ingresa un rango minimo de superficie para filtar: \n")
+                rango_min_sup = int(input("Su eleccion: "))
+                print("Ahora ingresa un rango maximo de superficie para filtrar: \n")
+                rango_max_sup = int(input("Su eleccion: "))
+            except ValueError:
+                print("Error. Solo se pueden ingresar numeros para los rangos. ")
+                return
+            for pais in diccionario:
+                if (
+                    int(pais["superficie"]) >= rango_min_sup
+                    and int(pais["superficie"]) <= rango_max_sup
+                ):
+                    print(
+                        f"{pais['nombre']} | Población: {pais['poblacion']} | Superficie: {pais['superficie']} km² | Continente: {pais['continente']}"
+                    )
+                    print("=" * 100)
+
+        case _:
+            print("Opción no válida. Por favor, seleccione 1, 2 o 3.")
+            return
 
 
 # ORDENAR PAISES POR NOMBRE, POBLACION, SUPERFICIE
@@ -216,22 +306,22 @@ def mostrar_estadisticas():
         print("No hay países cargados.")
         return
 
-    print ("\n====== ESTADÍSTICAS ======")
+    print("\n====== ESTADÍSTICAS ======")
 
-#Poblacion - Promedio
-    mayor_pob = max (diccionario, key = lambda p: int(p["poblacion"]))
-    menor_pob = min (diccionario, key = lambda p: int(p["poblacion"]))
-    prom_pob  = sum (int(p["poblacion"]) for p in diccionario) / len(diccionario)
+    # Poblacion - Promedio
+    mayor_pob = max(diccionario, key=lambda p: int(p["poblacion"]))
+    menor_pob = min(diccionario, key=lambda p: int(p["poblacion"]))
+    prom_pob = sum(int(p["poblacion"]) for p in diccionario) / len(diccionario)
 
-#Superficie - Promedio
-    mayor_sup = max (diccionario, key = lambda p: int(p["superficie"]))
-    menor_sup = min (diccionario, key = lambda p: int(p["superficie"]))
-    prom_sup  = sum (int(p["superficie"]) for p in diccionario) / len(diccionario)
+    # Superficie - Promedio
+    mayor_sup = max(diccionario, key=lambda p: int(p["superficie"]))
+    menor_sup = min(diccionario, key=lambda p: int(p["superficie"]))
+    prom_sup = sum(int(p["superficie"]) for p in diccionario) / len(diccionario)
 
-#Paises por continente 
+    # Paises por continente
     continentes = {}
     for p in diccionario:
-        c = p ["continente"]
+        c = p["continente"]
         continentes[c] = continentes.get(c, 0) + 1
 
     print(f"\n Población:")
@@ -261,7 +351,7 @@ while True:  # aca poner el menu con sus validaciones
         try:
             print("\n=============== MENÚ PRINCIPAL ===============")
             print(
-                "1. Agregaar un país al registro."
+                "1. Agregar un país al registro."
                 "\n2. Actualizar datos de población y superficie."
                 "\n3. Buscar país."
                 "\n4. Búsqueda avanzada por filtro."
@@ -299,7 +389,7 @@ while True:  # aca poner el menu con sus validaciones
             buscar_pais(diccionario)
 
         case 4:
-            pass
+            filtrar_pais(diccionario)
 
         case 5:
             ordenar_pais()
