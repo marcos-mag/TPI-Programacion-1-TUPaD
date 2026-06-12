@@ -108,9 +108,7 @@ def actualizar_pob_sup():
 
 
 # BUSCAR PAIS POR NOMBRE - OLI
-def buscar_pais(
-    diccionario,
-):  ## se me ocurre la funcion startswith() para las coincidencias parciales.
+def buscar_pais(diccionario):
     print("\n====== BUSCAR PAIS POR NOMBRE ======")
     busqueda_pais = (
         input(
@@ -119,45 +117,53 @@ def buscar_pais(
         .strip()
         .capitalize()
     )
-    pais_encontrado = False
+
     coincidencias_parciales = []
+
+    if len(busqueda_pais) < 3:
+        print("Debes introducir al menos tres letras para buscar coincidencias.\n")
+        return
+
     for pais in diccionario:
-        if len(busqueda_pais) < 3:
-            print("Debes introducir al menos tres letras para buscar coincidencias. ")
-            return
-        elif pais["nombre"].startswith(busqueda_pais):
+        if pais["nombre"].startswith(busqueda_pais):
             coincidencias_parciales.append(pais)
 
     if len(coincidencias_parciales) == 0:
-        print("Ningun pais coincide con los datos introducidos. \n")
+        print("Ningun pais coincide con los datos introducidos.\n")
+
     elif len(coincidencias_parciales) == 1:
-        for pais in diccionario:
-            if pais["nombre"] == coincidencias_parciales[0]:
-                print(
-                    f"Datos actuales de {coincidencias_parciales[0]}: | Poblacion: {pais['poblacion']} | Superficie: {pais['superficie']} | Continente: {pais['continente']} |"
-                )
+        pais_encontrado = coincidencias_parciales[0]
+        print(
+            f"Datos actuales de {pais_encontrado['nombre']}: | Poblacion: {pais_encontrado['poblacion']} | Superficie: {pais_encontrado['superficie']} | Continente: {pais_encontrado['continente']} |\n"
+        )
+
     else:
         print(
-            f"Tu busqueda arrojó mas de un resultado. Selecciona el país de la lista para ver sus datos."
+            "Tu busqueda arrojó mas de un resultado. Selecciona el país de la lista para ver sus datos."
         )
         for indice, pais in enumerate(coincidencias_parciales, start=1):
-            print(indice, pais)
-            pais_ok = False
+            print(f"{indice} - {pais['nombre']}")
+
+        pais_ok = False
         try:
             pais_elegido = int(input("Tu elección: "))
-            if not pais_elegido in range(1, len(coincidencias_parciales) + 1):
+            if pais_elegido not in range(1, len(coincidencias_parciales) + 1):
                 print(
-                    "No has ingresado una opcion valida. Recorda ingresar un numero de la lista. \n"
+                    "No has ingresado una opcion valida. Recorda ingresar un numero de la lista.\n"
                 )
             else:
                 pais_ok = True
                 pais_elegido -= 1
         except ValueError:
             print(
-                "No has ingresado una opcion valida. Solo se pueden ingresar numeros. \n"
+                "No has ingresado una opcion valida. Solo se pueden ingresar numeros.\n"
             )
+
         if pais_ok:
-            pass
+            pais_final = coincidencias_parciales[pais_elegido]
+            print(
+                f"Datos actuales de {pais_final['nombre']}: | Poblacion: {pais_final['poblacion']} | Superficie: {pais_final['superficie']} | Continente: {pais_final['continente']} |\n"
+            )
 
 
 # FILTRAR PAISES - OLI
@@ -203,49 +209,10 @@ def ordenar_pais():
 
 # MOSTRAR ESTADISTICAS:
 # Pais con menor y mayor poblacion.
-# Promedio de poblacion.
-# Promedio de superfice.
-# Promedio de paises por continente.
+# Promedio de poblacion
+# Promedio de superfice
 def mostrar_estadisticas():
-    if not diccionario:
-        print("No hay países cargados.")
-        return
-
-    print ("\n====== ESTADÍSTICAS ======")
-
-#Poblacion - Promedio
-    mayor_pob = max (diccionario, key = lambda p: int(p["poblacion"]))
-    menor_pob = min (diccionario, key = lambda p: int(p["poblacion"]))
-    prom_pob  = sum (int(p["poblacion"]) for p in diccionario) / len(diccionario)
-
-#Superficie - Promedio
-    mayor_sup = max (diccionario, key = lambda p: int(p["superficie"]))
-    menor_sup = min (diccionario, key = lambda p: int(p["superficie"]))
-    prom_sup  = sum (int(p["superficie"]) for p in diccionario) / len(diccionario)
-
-#Paises por continente 
-    continentes = {}
-    for p in diccionario:
-        c = p ["continente"]
-        continentes[c] = continentes.get(c, 0) + 1
-
-    print(f"\n Población:")
-    print(f"    Mayor: {mayor_pob['nombre']}({int(mayor_pob['poblacion']):,})")
-    print(f"    Menor: {menor_pob['nombre']}({int(menor_pob['poblacion']):,})")
-    print(f"    Promedio: {prom_pob:,.0f}")
-
-    print(f"\n  Superficie:")
-    print(f"    Mayor:   {mayor_sup['nombre']} ({int(mayor_sup['superficie']):,} km²)")
-    print(f"    Menor:   {menor_sup['nombre']} ({int(menor_sup['superficie']):,} km²)")
-    print(f"    Promedio: {prom_sup:,.0f} km²")
-
-    print(f"\n  Países por continente:")
-    for continente, cantidad in sorted(continentes.items()):
-        print(f"    {continente}: {cantidad}")
-
-
-
-
+    pass
 
 
 # BLOQUE PRINCIPAL
@@ -304,7 +271,7 @@ while True:  # aca poner el menu con sus validaciones
             ordenar_pais()
 
         case 6:
-            mostrar_estadisticas()
+            pass
 
         case 7:
             break
