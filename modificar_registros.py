@@ -3,9 +3,7 @@ def agregar_pais(diccionario):
     nuevo_pais_ok = False
     while True:
         try:
-            nuevo_pais = (
-                input("Ingrese nombre de pais a agregar: ").strip().capitalize()
-            )
+            nuevo_pais = input("Ingrese nombre de pais a agregar: ").strip().title()
             if any(d["nombre"] == nuevo_pais for d in diccionario):
                 print("Error. El pais ya se encuentra en los registros.")
                 break
@@ -36,13 +34,13 @@ def agregar_pais(diccionario):
                     nuevo_pais_cont = "Oceanía"
                 case _:
                     print("No has ingresado una opcion valida para el continente. ")
-                    break
+                    continue
 
         except ValueError:
             print(
                 "No has ingresado los valores correctamente. Recorda ingresar solo numeros para la poblacion y la superficie, y un elegir un numero de la lista para agregar el continente al que pertenece. \n"
             )
-            break
+            continue
         else:
             nuevo_pais_ok = True
             break
@@ -64,12 +62,11 @@ def agregar_pais(diccionario):
 # Actualiza poblacion y superficie de un pais ya registrasdo.
 def actualizar_pob_sup(diccionario):
     print("\n====== ACTUALIZAR POBLACION Y SUPERFICIE DE UN PAIS ======")
-    pais_actualizar = (
-        input("Ingrese el nombre del pais a actualizar: ").strip().capitalize()
-    )
-
+    pais_actualizar = input("Ingrese el nombre del pais a actualizar: ").strip().title()
+    pais_actualizar_encontrado = False
     for pais in diccionario:
         if pais["nombre"] == pais_actualizar:
+            pais_actualizar_encontrado = True
             print(
                 f"Datos actuales de {pais_actualizar}: | Poblacion: {pais['poblacion']} | Superficie: {pais['superficie']} | Continente: {pais['continente']} |"
             )
@@ -80,10 +77,11 @@ def actualizar_pob_sup(diccionario):
                 pais["superficie"] = nueva_sup
 
                 print(f"Datos de {pais_actualizar} actualizados correctamente.")
+                break
             except ValueError:
                 print(
                     "No has ingresado los valores correctamente. Recorda ingresar solo numeros para la poblacion y la superficie."
                 )
                 return
-
-    print(f"No se encontró el pais '{pais_actualizar}' en los registros.")
+    if not pais_actualizar_encontrado:
+        print(f"No se encontró el pais '{pais_actualizar}' en los registros.")
