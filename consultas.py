@@ -86,12 +86,18 @@ def filtrar_pais(diccionario):
                     return
 
             print(f"Paises pertenecientes al contiente {continente}: \n")
+            pais_encontrado_continente = False
             for pais in diccionario:
                 if pais["continente"] == continente:
+                    pais_encontrado_continente = True
                     print(
                         f"{pais['nombre']} | Población: {pais['poblacion']} | Superficie: {pais['superficie']} km² | Continente: {pais['continente']}"
                     )
                     print("=" * 100)
+            if not pais_encontrado_continente:
+                print(
+                    f"No se encuentra ningun pais perteneciente al continente {continente} en los registros. \n"
+                )
 
         case "2":
             try:
@@ -102,15 +108,21 @@ def filtrar_pais(diccionario):
             except ValueError:
                 print("Error. Solo se pueden ingresar numeros para los rangos. ")
                 return
+            pais_encontrado_rango_pob = False
             for pais in diccionario:
                 if (
                     int(pais["poblacion"]) >= rango_min_pob
                     and int(pais["poblacion"]) <= rango_max_pob
                 ):
+                    pais_encontrado_rango_pob = True
                     print(
                         f"{pais['nombre']} | Población: {pais['poblacion']} | Superficie: {pais['superficie']} km² | Continente: {pais['continente']}"
                     )
                     print("=" * 100)
+            if not pais_encontrado_rango_pob:
+                print(
+                    "No se encuentra ningun pais con ese rango de poblacion en los registros. \n"
+                )
 
         case "3":
             try:
@@ -121,16 +133,21 @@ def filtrar_pais(diccionario):
             except ValueError:
                 print("Error. Solo se pueden ingresar numeros para los rangos. ")
                 return
+            pais_encontrado_rango_sup = False
             for pais in diccionario:
                 if (
                     int(pais["superficie"]) >= rango_min_sup
                     and int(pais["superficie"]) <= rango_max_sup
                 ):
+                    pais_encontrado_rango_sup = True
                     print(
                         f"{pais['nombre']} | Población: {pais['poblacion']} | Superficie: {pais['superficie']} km² | Continente: {pais['continente']}"
                     )
                     print("=" * 100)
-
+            if not pais_encontrado_rango_sup:
+                print(
+                    "No se encuentra ningun pais con ese rango de superficie en los registros. \n"
+                )
         case _:
             print("Opción no válida. Por favor, seleccione 1, 2 o 3.")
             return
