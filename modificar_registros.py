@@ -54,7 +54,9 @@ def agregar_pais(diccionario):
             "superficie": nuevo_pais_sup,
             "continente": nuevo_pais_cont,
         }
-
+        print(
+            f"El pais {nuevo_pais} se ha agregado correctamente, con una población de {nuevo_pais_pob}, una superficie de {nuevo_pais_sup}, y perteneciente al continente de {nuevo_pais_cont}"
+        )
         diccionario.append(pais)
 
 

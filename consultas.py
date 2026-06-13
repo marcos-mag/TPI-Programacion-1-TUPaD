@@ -111,8 +111,8 @@ def filtrar_pais(diccionario):
             pais_encontrado_rango_pob = False
             for pais in diccionario:
                 if (
-                    int(pais["poblacion"]) >= rango_min_pob
-                    and int(pais["poblacion"]) <= rango_max_pob
+                    pais["poblacion"] >= rango_min_pob
+                    and pais["poblacion"] <= rango_max_pob
                 ):
                     pais_encontrado_rango_pob = True
                     print(
@@ -136,8 +136,8 @@ def filtrar_pais(diccionario):
             pais_encontrado_rango_sup = False
             for pais in diccionario:
                 if (
-                    int(pais["superficie"]) >= rango_min_sup
-                    and int(pais["superficie"]) <= rango_max_sup
+                    pais["superficie"] >= rango_min_sup
+                    and pais["superficie"] <= rango_max_sup
                 ):
                     pais_encontrado_rango_sup = True
                     print(

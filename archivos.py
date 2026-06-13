@@ -1,7 +1,5 @@
 import csv
 
-# INCLUIR EL PERMISSION ERROR EN ALGUN LADO. INVESTIGAR
-
 
 # FUNCION QUE LEE EL ARCHIVO
 def cargar_datos_csv(
@@ -32,6 +30,9 @@ def cargar_datos_csv(
 def guardar_datos_csv(
     lista_paises,
 ):  # Contiene el with open(..., 'w') para impactar los cambios en el archivo cuando usemos agregar_pais() o actualizar_pob_sup().
+    if not lista_paises:
+        print("Error. No hay datos cargados en el sistema para guardar.")
+        return
     try:
         with open(
             "data/datos_primera_prueba.csv", "w", newline="", encoding="utf-8"

@@ -9,7 +9,6 @@ from consultas import buscar_pais, filtrar_pais, ordenar_pais, mostrar_estadisti
 def main():
     diccionario = []
     diccionario = cargar_datos_csv(diccionario)
-    print(diccionario)
     while True:  # aca poner el menu con sus validaciones
         print(
             "\nBienvenido al sistema de gestion de datos geograficos. Ingresa la opcion para realizar la opcion que desees:"
