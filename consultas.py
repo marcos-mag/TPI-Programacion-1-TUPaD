@@ -6,7 +6,7 @@ def buscar_pais(diccionario):
             "Ingrese el país para buscar sus datos o introduce al menos las tres primeras letras para buscar coincidencias: "
         )
         .strip()
-        .capitalize()
+        .title()
     )
 
     coincidencias_parciales = []
@@ -36,25 +36,29 @@ def buscar_pais(diccionario):
             print(f"{indice} - {pais['nombre']}")
 
         pais_ok = False
-        try:
-            pais_elegido = int(input("Tu elección: "))
-            if pais_elegido not in range(1, len(coincidencias_parciales) + 1):
+        while True:
+            try:
+                pais_elegido = int(input("Tu elección: "))
+                if pais_elegido not in range(1, len(coincidencias_parciales) + 1):
+                    print(
+                        "No has ingresado una opcion valida. Recorda ingresar un numero de la lista.\n"
+                    )
+                    continue
+                else:
+                    pais_ok = True
+                    pais_elegido -= 1
+            except ValueError:
                 print(
-                    "No has ingresado una opcion valida. Recorda ingresar un numero de la lista.\n"
+                    "No has ingresado una opcion valida. Solo se pueden ingresar numeros.\n"
                 )
-            else:
-                pais_ok = True
-                pais_elegido -= 1
-        except ValueError:
-            print(
-                "No has ingresado una opcion valida. Solo se pueden ingresar numeros.\n"
-            )
+                continue
 
-        if pais_ok:
-            pais_final = coincidencias_parciales[pais_elegido]
-            print(
-                f"Datos actuales de {pais_final['nombre']}: | Poblacion: {pais_final['poblacion']} | Superficie: {pais_final['superficie']} | Continente: {pais_final['continente']} |\n"
-            )
+            if pais_ok:
+                pais_final = coincidencias_parciales[pais_elegido]
+                print(
+                    f"Datos actuales de {pais_final['nombre']}: | Poblacion: {pais_final['poblacion']} | Superficie: {pais_final['superficie']} | Continente: {pais_final['continente']} |\n"
+                )
+                break
 
 
 # FILTRAR PAISES
@@ -85,7 +89,7 @@ def filtrar_pais(diccionario):
                     print("No has ingresado una opcion valida para el continente. ")
                     return
 
-            print(f"Paises pertenecientes al contiente {continente}: \n")
+            print(f"Paises pertenecientes al continente {continente}: \n")
             pais_encontrado_continente = False
             for pais in diccionario:
                 if pais["continente"] == continente:
@@ -201,14 +205,14 @@ def mostrar_estadisticas(diccionario):
     print("\n====== ESTADÍSTICAS ======")
 
     # Poblacion - Promedio
-    mayor_pob = max(diccionario, key=lambda p: int(p["poblacion"]))
-    menor_pob = min(diccionario, key=lambda p: int(p["poblacion"]))
-    prom_pob = sum(int(p["poblacion"]) for p in diccionario) / len(diccionario)
+    mayor_pob = max(diccionario, key=lambda p: p["poblacion"])
+    menor_pob = min(diccionario, key=lambda p: p["poblacion"])
+    prom_pob = sum(p["poblacion"] for p in diccionario) / len(diccionario)
 
     # Superficie - Promedio
-    mayor_sup = max(diccionario, key=lambda p: int(p["superficie"]))
-    menor_sup = min(diccionario, key=lambda p: int(p["superficie"]))
-    prom_sup = sum(int(p["superficie"]) for p in diccionario) / len(diccionario)
+    mayor_sup = max(diccionario, key=lambda p: p["superficie"])
+    menor_sup = min(diccionario, key=lambda p: p["superficie"])
+    prom_sup = sum(p["superficie"] for p in diccionario) / len(diccionario)
 
     # Paises por continente
     continentes = {}
@@ -217,13 +221,13 @@ def mostrar_estadisticas(diccionario):
         continentes[c] = continentes.get(c, 0) + 1
 
     print(f"\n Población:")
-    print(f"    Mayor: {mayor_pob['nombre']}({int(mayor_pob['poblacion']):,})")
-    print(f"    Menor: {menor_pob['nombre']}({int(menor_pob['poblacion']):,})")
+    print(f"    Mayor: {mayor_pob['nombre']}({mayor_pob['poblacion']:,})")
+    print(f"    Menor: {menor_pob['nombre']}({menor_pob['poblacion']:,})")
     print(f"    Promedio: {prom_pob:,.0f}")
 
     print(f"\n  Superficie:")
-    print(f"    Mayor:   {mayor_sup['nombre']} ({int(mayor_sup['superficie']):,} km²)")
-    print(f"    Menor:   {menor_sup['nombre']} ({int(menor_sup['superficie']):,} km²)")
+    print(f"    Mayor:   {mayor_sup['nombre']} ({mayor_sup['superficie']:,} km²)")
+    print(f"    Menor:   {menor_sup['nombre']} ({menor_sup['superficie']:,} km²)")
     print(f"    Promedio: {prom_sup:,.0f} km²")
 
     print(f"\n  Países por continente:")
