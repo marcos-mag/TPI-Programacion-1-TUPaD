@@ -19,9 +19,17 @@ def cargar_datos_csv(
                     fila["superficie"] = int(fila["superficie"])
                 lista_paises.append(fila)
         return lista_paises
+    
     except FileNotFoundError:
-        print("Archivo no encontrado. ")
-        return  # devuelve none.
+            print("Archivo no encontrado. Creando archivo nuevo...")
+            import os
+            os.makedirs("data", exist_ok=True)
+            with open("data/datos_primera_prueba.csv", "w", newline="", encoding="utf-8") as archivo:
+                escritor = csv.DictWriter(archivo, fieldnames=["nombre", "poblacion", "superficie", "continente"])
+                escritor.writeheader()
+            print("Archivo CSV creado. El sistema arranca sin datos cargados.")
+            return lista_paises  # devuelve lista vacía en lugar de None
+    
     except Exception as e:
         print(f"Ocurrió un error inesperado: {e}")
 
@@ -37,7 +45,7 @@ def guardar_datos_csv(
         with open(
             "data/datos_primera_prueba.csv", "w", newline="", encoding="utf-8"
         ) as archivo:
-            escritor_dict = csv.DictWriter(archivo, fieldnames=lista_paises[0].keys())
+            escritor_dict = csv.DictWriter(archivo, fieldnames=["nombre", "poblacion", "superficie", "continente"])
             escritor_dict.writeheader()
             escritor_dict.writerows(lista_paises)
     except PermissionError:
