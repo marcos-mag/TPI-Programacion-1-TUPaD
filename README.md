@@ -33,21 +33,31 @@ python main.py
 Funcionalidades del Menú Principal
 Una vez iniciado, el sistema te guiará mediante un menú interactivo. Debes ingresar el número de la opción que deseas utilizar:
 
-Buscar País: Permite ingresar el nombre de un país. Si no recuerdas el nombre completo, el sistema buscará coincidencias parciales y te mostrará una lista para elegir.
+1. Agregar un país al registro: Permite agregar un pais nuevo al registro. Debes ingresar nombre del pais, poblacion, superficie y elegir al continente al que pertenece.
 
-Filtrar Países: Puedes agrupar y visualizar países según distintos criterios:
+2. Actualizar datos de población y superficie: Permite buscar un pais existente y actualizar datos de poblacion y superficie.
 
-Por Continente.
+3. Buscar País: Permite ingresar el nombre de un país. Si no recuerdas el nombre completo, el sistema buscará coincidencias parciales y te mostrará una lista para elegir.
 
-Por rango de Población (mínimo y máximo).
+4. Búsqueda avanzada por filtro: Permite agrupar y visualizar países según distintos criterios:
+   - Por Continente.
 
-Por rango de Superficie.
+   - Por rango de Población (mínimo y máximo).
 
-Estadísticas: Muestra cálculos automáticos basados en los datos cargados (por ejemplo, el país más poblado, el más grande, promedios, etc.).
+   - Por rango de Superficie.
+
+5. Lista de países ordenada: Permite visualizar los paises cargados segun criterios de orden ascendente o descendente. Se pueden ordenan los paises segun orden de:
+   - Por Nombre (orden alfabetico).
+
+   - Por Poblacion
+
+   - Por Superficie.
+
+6. Estadísticas: Muestra cálculos automáticos basados en los datos cargados (por ejemplo, el país más poblado, el más grande, promedios, etc.).
 
 Modificar Registros: Permite actualizar los datos de un país existente o agregar uno nuevo al sistema.
 
-Salir y Guardar: Es vital usar esta opción para cerrar el programa, ya que se encargará de sobreescribir el archivo .csv original (usando DictWriter) guardando todos los cambios realizados en la sesión.
+7. Salir. Finaliza el programa.
 
 ## 📎 Enlaces Importantes
 
