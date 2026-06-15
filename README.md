@@ -60,7 +60,7 @@ Una vez iniciado, el sistema te guiará mediante un menú interactivo. Debes ing
 ## 📎 Enlaces Importantes
 
 📄 Leer el Marco Teórico e Informe Final (PDF) : 
-https://docs.google.com/document/d/1ivLAGEaU0CvoOno0qlBwHhoQBWM3keaP7MoZqKH9yOo/edit?usp=sharing
+https://drive.google.com/file/d/13ORCA3zdP-ak6cvL9u-TrZN1F4jeehc_/view?usp=sharing
 
 🎥 Ver Video Demostrativo del Proyecto: 
 https://drive.google.com/file/d/1NyVMpYinguaTfjq69MlDLj9f6rwmCshV/view?usp=sharing
