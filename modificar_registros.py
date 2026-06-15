@@ -3,7 +3,21 @@ def agregar_pais(diccionario):
     nuevo_pais_ok = False
     while True:
         try:
-            nuevo_pais = input("Ingrese nombre de pais a agregar: ").strip().title()
+            nuevo_pais = (
+                input(
+                    "Ingrese nombre de pais a agregar. Para volver al menu principal, deja este campo vacío y presiona enter: "
+                )
+                .strip()
+                .title()
+            )
+            if not nuevo_pais:
+                print("No has ingresado nada. Retornando al menú principal. \n")
+                break
+            elif not nuevo_pais.replace(" ", "").isalpha():
+                print(
+                    "Error. Solo se permite ingresar letras para el nombre de un país. \n"
+                )
+                break
             if any(d["nombre"] == nuevo_pais for d in diccionario):
                 print("Error. El pais ya se encuentra en los registros.")
                 break
