@@ -22,7 +22,7 @@ Este proyecto es una aplicación de consola desarrollada en **Python** diseñada
 ### Requisitos previos
 
 - Tener instalado **Python 3.x** en tu computadora.
-- Mantener el archivo `paises.csv` (o el nombre de tu dataset) en la misma carpeta que los scripts de Python.
+- Mantener el archivo `datos_primera_prueba.csv` (o el nombre de tu dataset) en la misma carpeta que los scripts de Python.
 
 ### Ejecución
 
