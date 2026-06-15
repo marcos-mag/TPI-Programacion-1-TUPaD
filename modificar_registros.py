@@ -76,7 +76,16 @@ def agregar_pais(diccionario):
 # Actualiza poblacion y superficie de un pais ya registrasdo.
 def actualizar_pob_sup(diccionario):
     print("\n====== ACTUALIZAR POBLACION Y SUPERFICIE DE UN PAIS ======")
-    pais_actualizar = input("Ingrese el nombre del pais a actualizar: ").strip().title()
+    pais_actualizar = (
+        input(
+            "Ingrese el nombre del pais a actualizar. Para volver al menú principal. Dejá este campo vacío y presiona Enter:  "
+        )
+        .strip()
+        .title()
+    )
+    if not pais_actualizar:
+        print("No has ingresado nada. Retornando al menú principal. \n")
+        return
     pais_actualizar_encontrado = False
     for pais in diccionario:
         if pais["nombre"] == pais_actualizar:

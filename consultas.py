@@ -3,7 +3,7 @@ def buscar_pais(diccionario):
     print("\n====== BUSCAR PAIS POR NOMBRE ======")
     busqueda_pais = (
         input(
-            "Ingrese el país para buscar sus datos o introduce al menos las tres primeras letras para buscar coincidencias: "
+            "Ingrese el país para buscar sus datos o introduce al menos las tres primeras letras para buscar coincidencias. Para volver al menú principal. Dejá este campo vacío y presiona Enter:  "
         )
         .strip()
         .title()
@@ -11,8 +11,14 @@ def buscar_pais(diccionario):
 
     coincidencias_parciales = []
 
-    if len(busqueda_pais) < 3:
-        print("Debes introducir al menos tres letras para buscar coincidencias.\n")
+    if not busqueda_pais:
+        print("No has ingresado nada. Retornando al menú principal. \n")
+        return
+
+    elif len(busqueda_pais) < 3:
+        print(
+            "Debes introducir al menos tres letras para buscar coincidencias. Retornando al menú principal.\n"
+        )
         return
 
     for pais in diccionario:
@@ -30,15 +36,19 @@ def buscar_pais(diccionario):
 
     else:
         print(
-            "Tu busqueda arrojó mas de un resultado. Selecciona el país de la lista para ver sus datos."
+            "Tu busqueda arrojó mas de un resultado. Selecciona el país de la lista para ver sus datos. Para volver al menú principal. Dejá este campo vacío y presiona Enter:  "
         )
         for indice, pais in enumerate(coincidencias_parciales, start=1):
             print(f"{indice} - {pais['nombre']}")
 
         pais_ok = False
         while True:
+            pais_elegido = input("Tu elección: ")
+            if not pais_elegido:
+                print("No has ingresado nada. Retornando al menú principal \n")
+                return
             try:
-                pais_elegido = int(input("Tu elección: "))
+                pais_elegido = int(pais_elegido)
                 if pais_elegido not in range(1, len(coincidencias_parciales) + 1):
                     print(
                         "No has ingresado una opcion valida. Recorda ingresar un numero de la lista.\n"
@@ -86,7 +96,9 @@ def filtrar_pais(diccionario):
                 case "5":
                     continente = "Oceanía"
                 case _:
-                    print("No has ingresado una opcion valida para el continente. ")
+                    print(
+                        "No has ingresado una opcion valida para el continente. Retornando al menú principal."
+                    )
                     return
 
             print(f"Paises pertenecientes al continente {continente}: \n")
@@ -110,7 +122,9 @@ def filtrar_pais(diccionario):
                 print("Ahora ingresa un rango maximo de poblacion para filtrar: \n")
                 rango_max_pob = int(input("Su eleccion: "))
             except ValueError:
-                print("Error. Solo se pueden ingresar numeros para los rangos. ")
+                print(
+                    "Error. Solo se pueden ingresar numeros para los rangos. Retornando al menú principal."
+                )
                 return
             pais_encontrado_rango_pob = False
             for pais in diccionario:
@@ -135,7 +149,9 @@ def filtrar_pais(diccionario):
                 print("Ahora ingresa un rango maximo de superficie para filtrar: \n")
                 rango_max_sup = int(input("Su eleccion: "))
             except ValueError:
-                print("Error. Solo se pueden ingresar numeros para los rangos. ")
+                print(
+                    "Error. Solo se pueden ingresar numeros para los rangos. Retornando al menú principal."
+                )
                 return
             pais_encontrado_rango_sup = False
             for pais in diccionario:
@@ -153,7 +169,9 @@ def filtrar_pais(diccionario):
                     "No se encuentra ningun pais con ese rango de superficie en los registros. \n"
                 )
         case _:
-            print("Opción no válida. Por favor, seleccione 1, 2 o 3.")
+            print(
+                "Opción no válida. Por favor, seleccione 1, 2 o 3. Retornando al menú principal. "
+            )
             return
 
 
@@ -173,12 +191,14 @@ def ordenar_pais(diccionario):
         case "3":
             clave = "superficie"
         case _:
-            print("Opción no válida. Por favor, seleccione 1, 2 o 3.")
+            print(
+                "Opción no válida. Por favor, seleccione 1, 2 o 3. Retornando al menú principal."
+            )
             return
 
     orden = input(" Orden: 'A' Ascendente o 'D' Descendente: ").strip().upper()
     if orden not in ("A", "D"):
-        print("Opcion de orden no válida.")
+        print("Opcion de orden no válida. Retornando al menú principal.")
         return
 
     descendete = orden == "D"
