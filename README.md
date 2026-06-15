@@ -55,8 +55,6 @@ Una vez iniciado, el sistema te guiará mediante un menú interactivo. Debes ing
 
 6. Estadísticas: Muestra cálculos automáticos basados en los datos cargados (por ejemplo, el país más poblado, el más grande, promedios, etc.).
 
-Modificar Registros: Permite actualizar los datos de un país existente o agregar uno nuevo al sistema.
-
 7. Salir. Finaliza el programa.
 
 ## 📎 Enlaces Importantes
